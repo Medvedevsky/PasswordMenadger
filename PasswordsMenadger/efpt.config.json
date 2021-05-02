@@ -1,12 +1,12 @@
 ﻿{
    "CodeGenerationMode": 0,
-   "ContextClassName": "PasswordsstorageContext",
+   "ContextClassName": "GlobalContext",
    "ContextNamespace": "Models",
    "DefaultDacpacSchema": null,
    "FilterSchemas": false,
    "IncludeConnectionString": true,
    "ModelNamespace": "Models",
-   "OutputContextPath": "Models",
+   "OutputContextPath": "Contexts",
    "OutputPath": "Models",
    "ProceduresReturnList": false,
    "ProjectRootNamespace": "PasswordsMenadger",
@@ -14,6 +14,10 @@
    "SelectedHandlebarsLanguage": 0,
    "SelectedToBeGenerated": 0,
    "Tables": [
+      {
+         "Name": "[dbo].[Sites]",
+         "ObjectType": 0
+      },
       {
          "Name": "[dbo].[Users]",
          "ObjectType": 0

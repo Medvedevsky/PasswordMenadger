@@ -20,7 +20,7 @@ namespace PasswordsMenadger
         protected override void OnStartup(StartupEventArgs e)
         {
             GlobalContext globalContext = new GlobalContext(new DbContextOptions<GlobalContext>());
-            PasswordsGridView mainView = new PasswordsGridView();
+            PasswordsCardView mainView = new PasswordsCardView(globalContext);
             mainView.Show();
             base.OnStartup(e);
         }

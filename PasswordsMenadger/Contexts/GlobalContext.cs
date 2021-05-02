@@ -8,6 +8,7 @@ namespace PasswordsMenadger.Contexts
 {
     public partial class GlobalContext : DbContext
     {
+        public virtual DbSet<Site> Sites { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         public GlobalContext(DbContextOptions<GlobalContext> options) : base(options)
@@ -26,6 +27,15 @@ namespace PasswordsMenadger.Contexts
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Cyrillic_General_CI_AS");
 
+            modelBuilder.Entity<Site>(entity =>
+            {
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.UrlPath).IsRequired();
+            });
+
             modelBuilder.Entity<User>(entity =>
             {
                 entity.Property(e => e.Login)
@@ -36,7 +46,10 @@ namespace PasswordsMenadger.Contexts
                     .IsRequired()
                     .HasMaxLength(250);
 
-                entity.Property(e => e.Site).IsRequired();
+                entity.HasOne(d => d.Site)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.SiteId)
+                    .HasConstraintName("FK_Users_Sites");
             });
 
             OnModelCreatingPartial(modelBuilder);
