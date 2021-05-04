@@ -5,24 +5,28 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.EntityFrameworkCore;
-using PasswordsMenadger.Contexts;
+using PasswordsMenadger.DBContent;
 using PasswordsMenadger.Views;
 
 namespace PasswordsMenadger
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    /// Логика взаимодействия для App.xaml
     /// </summary>
     public partial class App : Application
     {
-        
-        protected override void OnStartup(StartupEventArgs e)
+        public App()
         {
-            GlobalContext globalContext = new GlobalContext(new DbContextOptions<GlobalContext>());
-            PasswordsCardView mainView = new PasswordsCardView(globalContext);
-            mainView.Show();
-            base.OnStartup(e);
+            InitializeComponent();
+        }
+
+        [STAThread]
+        static void Main()
+        {
+            App app = new App();
+            GlobalContext context = new GlobalContext();
+            PasswordsCardView mainView = new PasswordsCardView(context);
+            app.Run(mainView);
         }
     }
 }
